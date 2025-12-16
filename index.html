@@ -1,0 +1,96 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Interactive Bézier Rope — Physics & Tangents</title>
+  <link rel="stylesheet" href="styles.css" />
+</head>
+<body>
+  <div class="app">
+    <header>
+      <h1>Interactive Bézier Rope — Physics & Tangents</h1>
+      <p class="subtitle">Explorable explanation of cubic Bézier math, tangents, and spring dynamics</p>
+    </header>
+
+    <section class="controls">
+      <div class="control-group">
+        <label>Stiffness k <span id="kVal"></span></label>
+        <input type="range" id="stiffness" min="5" max="400" step="1" value="120" />
+      </div>
+      <div class="control-group">
+        <label>Damping <span id="dVal"></span></label>
+        <input type="range" id="damping" min="0" max="1" step="0.01" value="0.12" />
+      </div>
+      <div class="control-group">
+        <label>Mass <span id="mVal"></span></label>
+        <input type="range" id="mass" min="0.1" max="5" step="0.1" value="1.0" />
+      </div>
+      <div class="control-group">
+        <label>Samples (curve points) <span id="nVal"></span></label>
+        <input type="range" id="samples" min="16" max="256" step="1" value="120" />
+      </div>
+      <div class="control-row">
+        <label><input type="checkbox" id="showTangents" checked /> Show tangents</label>
+        <label><input type="checkbox" id="showCasteljau" /> Show De Casteljau</label>
+        <label><input type="checkbox" id="colorCurvature" checked /> Color by curvature</label>
+      </div>
+      <div class="control-row">
+        <button id="resetBtn">Reset</button>
+        <button id="gifBtn">Record 5s GIF</button>
+        <button id="pauseBtn">Pause</button>
+      </div>
+      <div class="control-row">
+        <label><input type="checkbox" id="hideOverlay" /> Hide overlay (legend/HUD/tips)</label>
+      </div>
+    </section>
+
+    <section class="canvas-wrap">
+      <canvas id="canvas" width="1000" height="600"></canvas>
+      <div class="overlay" id="overlay">
+        <div class="legend bottom-right" id="legend">
+          <span class="dot p0">P0</span>
+          <span class="dot p1">P1 (dynamic)</span>
+          <span class="dot p2">P2 (dynamic)</span>
+          <span class="dot p3">P3</span>
+        </div>
+        <div class="tips" id="tips">
+          <p>Mouse/touch: drag anywhere to set target for P1/P2. Hold Shift to drag control points directly.</p>
+          <p>Physics: k, damping, mass. Toggle tangents, De Casteljau, curvature.</p>
+        </div>
+        <div class="hud" id="hud">
+          <div><strong>FPS:</strong> <span id="hudFps">–</span></div>
+          <div><strong>k:</strong> <span id="hudK">–</span> | <strong>damping:</strong> <span id="hudD">–</span> | <strong>mass:</strong> <span id="hudM">–</span></div>
+          <div id="hudNote" style="margin-top:4px;color:#8ea3c4;">Drag to drive targets. Shift-drag to move points.</div>
+        </div>
+      </div>
+    </section>
+
+    <section class="explain">
+      <h2>Explorable Explanation</h2>
+      <div class="explain-grid">
+        <div>
+          <h3>Cubic Bézier</h3>
+          <p>B(t) = (1−t)^3 P0 + 3(1−t)^2 t P1 + 3(1−t) t^2 P2 + t^3 P3</p>
+        </div>
+        <div>
+          <h3>Derivative (Tangent)</h3>
+          <p>B'(t) = 3(1−t)^2 (P1−P0) + 6(1−t)t (P2−P1) + 3 t^2 (P3−P2)</p>
+        </div>
+        <div>
+          <h3>Spring-Damper</h3>
+          <p>a = -(k/m)(x − x_target) − (d/m) v</p>
+        </div>
+        <div>
+          <h3>De Casteljau</h3>
+          <p>Recursive linear interpolation that constructs B(t) via blending lines.</p>
+        </div>
+      </div>
+    </section>
+
+    <footer></footer>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>

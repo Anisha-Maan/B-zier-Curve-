@@ -1,0 +1,39 @@
+* { box-sizing: border-box; }
+html, body { height: 100%; }
+body { margin: 0; font-family: ui-sans-serif, system-ui, -apple-system, Segoe UI, Roboto, Helvetica, Arial; background: linear-gradient(135deg, #0b1a22 0%, #0a2230 50%, #0a1f2b 100%); color: #ecf6ff; }
+
+.app { max-width: 1100px; margin: 0 auto; padding: 24px; }
+header { margin-bottom: 12px; }
+header h1 { margin: 0; font-weight: 700; font-size: 24px; }
+.subtitle { color: #9fb1cc; margin-top: 4px; }
+
+.controls { display: grid; grid-template-columns: repeat(2, minmax(280px, 1fr)); gap: 12px; background: rgba(18, 24, 50, 0.85); padding: 12px; border: 1px solid rgba(60, 90, 150, 0.35); border-radius: 12px; backdrop-filter: blur(6px); }
+.control-group { background: rgba(15, 20, 40, 0.9); padding: 10px; border-radius: 8px; border: 1px solid rgba(50, 75, 120, 0.5); }
+.control-group label { display: flex; justify-content: space-between; margin-bottom: 8px; color: #cfe2ff; font-size: 13px; }
+.control-row { display: flex; gap: 8px; align-items: center; }
+button { background: linear-gradient(180deg, #1fb3a6 0%, #109c8f 100%); border: none; padding: 8px 12px; border-radius: 8px; color: #ffffff; cursor: pointer; box-shadow: 0 4px 12px rgba(16, 156, 143, 0.35); }
+button:hover { background: linear-gradient(180deg, #27c7b8 0%, #14ad9f 100%); box-shadow: 0 6px 16px rgba(31, 179, 166, 0.45); }
+
+.canvas-wrap { position: relative; margin-top: 16px; border: 1px solid rgba(60, 90, 150, 0.35); border-radius: 14px; overflow: hidden; box-shadow: 0 12px 30px rgba(0,0,0,0.35); }
+#canvas { display: block; width: 100%; height: auto; background: radial-gradient(1200px 600px at 50% 30%, #0c2432, #081a26); }
+.overlay { position: absolute; inset: 0; pointer-events: none; display: flex; justify-content: space-between; }
+.legend.bottom-right { position: absolute; bottom: 10px; right: 10px; }
+.legend { margin: 10px; display: flex; gap: 10px; }
+.legend .dot { padding: 4px 8px; background: rgba(15, 20, 40, 0.9); border: 1px solid rgba(50, 75, 120, 0.5); border-radius: 999px; font-size: 12px; color: #cfe2ff; }
+.tips { margin: 10px; text-align: right; color: #a9c3f0; font-size: 12px; }
+
+.explain { margin-top: 18px; }
+.explain-grid { display: grid; grid-template-columns: repeat(2, minmax(280px, 1fr)); gap: 12px; }
+.explain h3 { margin: 0 0 6px; font-size: 16px; color: #cbd6e5; }
+.explain p { margin: 0; color: #a9c3f0; }
+
+/* Accent colors */
+.p0 { border-color: #7bd3ff; color: #7bd3ff; }
+.p1 { border-color: #4ce8ff; color: #4ce8ff; }
+.p2 { border-color: #8effa0; color: #8effa0; }
+.p3 { border-color: #ffa1d8; color: #ffa1d8; }
+
+/* Tooltip heads-up display */
+.hud { position: absolute; top: 10px; right: 10px; padding: 8px 10px; background: rgba(15, 20, 40, 0.92); border: 1px solid rgba(50, 75, 120, 0.5); border-radius: 8px; font-size: 12px; color: #cfe2ff; box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
+
+/* Draggable point style (drawn on canvas but used for legend) */
